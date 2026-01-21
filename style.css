@@ -15,6 +15,7 @@ body {
   width: 100%;
   min-height: 100vh;
   background-color: #fff3de;
+  user-select: none;
 }
 
 header {
@@ -204,3 +205,9 @@ main {
 
 }
 
+
+.dark-theme{
+  background: #121212;
+  color: #ffffff;
+  border: 0.5px solid white;
+}
