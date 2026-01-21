@@ -58,11 +58,13 @@ Array.from(buttons).forEach((button) => {
     else if (buttonValue === '=') {
       let inputString = document.querySelector('.result-panel').textContent
       result = eval(inputString)
+      
+      history = result
+      
       if(history) {
         history1.textContent = history
       }
       document.querySelector('.result-panel').textContent = result
-      history = result
     }
 
     else if (buttonValue === 'uwu') {
