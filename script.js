@@ -62,10 +62,9 @@ for (const index in buttons) {
     else if(button.id === 'equal') {
       inputBox.value = eval(inputBox.value)
       resultPanel.textContent = inputBox.value
-      isNumberValueAvailable = false
     }
 
-    else if(button.classList[0] === 'operator' && isNumberValueAvailable){
+    else if(button.classList[0] === 'operator' && isNumberValueAvailable && inputBox.value){
       inputBox.value = inputBox.value + button.value
     }
 
