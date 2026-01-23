@@ -60,8 +60,9 @@ for (const index in buttons) {
     }
 
     else if(button.id === 'equal') {
-      result = eval(inputBox.value)
-      resultPanel.textContent = result
+      inputBox.value = eval(inputBox.value)
+      resultPanel.textContent = inputBox.value
+      isNumberValueAvailable = false
     }
 
     else if(button.classList[0] === 'operator' && isNumberValueAvailable){
