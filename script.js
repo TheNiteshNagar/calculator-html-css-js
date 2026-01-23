@@ -1,81 +1,71 @@
-// let buttonValue = ''
-let result = ''
-let history1 = document.getElementById('history-1')
-let history2 = document.getElementById('history-2')
-let history3 = document.getElementById('history-3')
-let showHistory = false
-let history = ''
-// let fullScreenButton = document.getElementById('full-screen')
-// let themeSwitchButton = document.getElementById('theme-switch')
+// features buttons 
+document.querySelector('.uwu-button').addEventListener('click', ()=>{
+  const uwuPlay = new Audio('./public/audios/audio-uwu.mp3')
+  uwuPlay.currentTime = 0
+  uwuPlay.play() 
+})
 
-// let clearButton = document.getElementById('clear')
+document.querySelector('.theme-switch-button').addEventListener('click', ()=>{
+  alert('Dark Theme Is The Best Theme 😤')
+})
+
+document.querySelector('.full-screen-button').addEventListener('click', ()=>{
+  if(document.fullscreenElement){
+    document.exitFullscreen()
+  } else{
+    document.body.requestFullscreen()
+  }
+})
 
 
+// calculator button
+let inputBox = document.querySelector('input')    // input box 
+let firstValue = ''   //to check is first value is operator or dot or any other non numeric value? 
+let isOpenParenthesisAvailable = false      // check is there any open parenthesis is avalaible or not
+let isNumberValueAvailable = false
+const buttons = document.querySelectorAll('button')
+// Array.from(buttons).forEach(button => {
+//   button.addEventListener('click', ()=>{
+//     console.log(typeof(button))
+//   })
+// })
 
-let lightTheme = true
-let buttons = document.querySelectorAll('.button')
+// buttons.forEach(button => {
+//   button.addEventListener('click', ()=>{
+//     alert('chacha')
+//   })
+// })
 
-Array.from(buttons).forEach((button) => {
-  button.addEventListener('click', () => {
-    buttonValue = button.id
+for (const index in buttons) {
+  if (!Object.hasOwn(buttons, index)) continue;
+  
+  const button = buttons[index];
+  button.addEventListener('click', ()=>{
 
-    if (buttonValue === 'full-screen') {
-      if (document.fullscreenElement) {
-        document.exitFullscreen()
-      } else {
-        document.querySelector('.calculator').requestFullscreen()
+    if(button.id === 'clear') {
+      inputBox.value = ''
+    } 
+    
+    else if(button.id === 'parenthesis') {
+      if(!isOpenParenthesisAvailable) {
+        inputBox.value = inputBox.value + '('
+        isOpenParenthesisAvailable = true
+      } else if(isNumberValueAvailable) {
+        inputBox.value = inputBox.value + ')'
+        isOpenParenthesisAvailable = false
       }
     }
 
-    else if (buttonValue === 'theme-switch') {
-      
-      if(true){
-        if(lightTheme){
-          document.body.classList.add('dark-theme')
-          document.body.querySelector('header').classList.add('dark-theme')
-          document.body.querySelector('.calculator').classList.add('dark-theme')
-          document.body.querySelector('.display-panel').classList.add('dark-theme')
-          document.body.querySelector('.button').classList.add('dark-theme')
-          document.body.querySelector('.button-panel').classList.add('dark-theme')
-        } else{
-          document.body.classList.remove('dark-theme')
-          document.body.querySelector('header').classList.remove('dark-theme')
-          document.body.querySelector('.calculator').classList.remove('dark-theme')
-          document.body.querySelector('.display-panel').classList.remove('dark-theme')
-          document.body.querySelector('.button').classList.remove('dark-theme')
-          document.body.querySelector('.button-panel').classList.remove('dark-theme')
-        }
-        lightTheme = !lightTheme
-      }
+    else if(button.id === 'backspace') {
+      inputBox.value = inputBox.value.slice(0, -1)
+    }
+
+    else if(button.id === 'equal') {
       
     }
 
-    else if (buttonValue === 'clear') {
-      document.querySelector('.result-panel').textContent = ''
-      showHistory = false
-    }
 
-    else if (buttonValue === '=') {
-      let inputString = document.querySelector('.result-panel').textContent
-      result = eval(inputString)
-      
-      history = result
-      
-      if(history) {
-        history1.textContent = history
-      }
-      document.querySelector('.result-panel').textContent = result
-    }
 
-    else if (buttonValue === 'uwu') {
-      const uwuAudio = new Audio('./public/audio-uwu.mp3')
-      uwuAudio.currentTime = 0
-      uwuAudio.play()
-    }
-
-    else {
-      document.querySelector('.result-panel').append(buttonValue)
-    }
 
   })
-})
+}

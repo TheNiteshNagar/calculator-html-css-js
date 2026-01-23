@@ -8,7 +8,7 @@
   <link rel="shortcut icon" href="https://img.icons8.com/?size=100&id=qrOXrfUDKkOX&format=png&color=000000"
     type="image/x-icon">
   <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
+  <script defer src="script.js"></script>
 </head>
 
 <body>
@@ -18,43 +18,46 @@
       <div class="theme-switch-button">
         <div class="circle-button"></div>
       </div>
-      <div class="full-screen-button"></div>
+      <div class="full-screen-button" style="cursor: pointer;"></div>
     </div>
 
     <div class="display-panel">
-      <div class="input-panel result-panel"></div>
+      <div class="result-panel">102</div>
+      <div class="input-panel">
+        <input type="text" id="input-box" value="324324" autocomplete="off" inputmode="none" autofocus>
+      </div>
     </div>
 
     <div class="button-panel">
       <div class="row-1">
-        <button class="clear-button">C</button>
-        <button class="parenthesis-button">()</button>
-        <button class="percent-button">%</button>
-        <button class="divide-button">÷</button>
+        <button id="clear" class="clear-button">C</button>
+        <button id="parenthesis" class="parenthesis-button">( )</button>
+        <button class="operator percent-button">%</button>
+        <button class="operator divide-button">÷</button>
       </div>
       <div class="row-2">
-        <button class="clear-button">7</button>
-        <button class="parenthesis-button">8</button>
-        <button class="percent-button">9</button>
-        <button class="divide-button">X</button>
+        <button class="seven-button">7</button>
+        <button class="eight-button">8</button>
+        <button class="nine-button">9</button>
+        <button class="operator multiply-button">X</button>
       </div>
       <div class="row-3">
-        <button class="clear-button">4</button>
-        <button class="parenthesis-button">5</button>
-        <button class="percent-button">6</button>
-        <button class="divide-button">-</button>
+        <button class="four-button">4</button>
+        <button class="five-button">5</button>
+        <button class="six-button">6</button>
+        <button class="operator minus-button">-</button>
       </div>
       <div class="row-4">
-        <button class="clear-button">1</button>
-        <button class="parenthesis-button">2</button>
-        <button class="percent-button">3</button>
-        <button class="divide-button">+</button>
+        <button class="one-button">1</button>
+        <button class="two-button">2</button>
+        <button class="three-button">3</button>
+        <button class="operator addition-button">+</button>
       </div>
       <div class="row-5">
-        <button class="clear-button">.</button>
-        <button class="parenthesis-button">0</button>
-        <button class="percent-button" style="background-image: url('public/images/backspace.png'); background-size: 50%; background-repeat: no-repeat; aspect-ratio: 1/1; background-position: center;"></button>
-        <button class="divide-button">=</button>
+        <button class="dot-button">.</button>
+        <button class="zero-button">0</button>
+        <button id="backspace" class="back-space-button"></button>
+        <button id="equal" class="equal-button">=</button>
       </div>
     </div>
   </div>
