@@ -60,8 +60,8 @@ for (const index in buttons) {
     }
 
     else if(button.id === 'equal') {
-      inputBox.value = eval(inputBox.value)
-      resultPanel.textContent = inputBox.value
+      resultPanel.textContent = eval(inputBox.value)
+      inputBox.value = ''
     }
 
     else if(button.classList[0] === 'operator' && isNumberValueAvailable && inputBox.value){
@@ -82,3 +82,9 @@ for (const index in buttons) {
 
   })
 }
+
+document.querySelector('.result-panel').addEventListener('click', ()=>{
+  if(resultPanel.textContent){
+    inputBox.value = resultPanel.textContent
+  }
+})
