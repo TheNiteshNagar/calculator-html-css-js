@@ -29,6 +29,23 @@ const buttons = document.querySelectorAll('button')
 let openParenthesis = false
 let closeParenthesis = false
 
+// Helper function to insert text at cursor position
+function insertAtCursor(text) {
+  const start = inputBox.selectionStart
+  const end = inputBox.selectionEnd
+  const currentValue = inputBox.value
+  
+  // Insert text at cursor position, replacing any selected text
+  inputBox.value = currentValue.substring(0, start) + text + currentValue.substring(end)
+  
+  // Set cursor position after the inserted text
+  const newCursorPos = start + text.length
+  inputBox.setSelectionRange(newCursorPos, newCursorPos)
+  
+  // Focus the input box to maintain cursor position
+  inputBox.focus()
+}
+
 
 for (const index in buttons) {
   if (!Object.hasOwn(buttons, index)) continue;
@@ -44,11 +61,11 @@ for (const index in buttons) {
     
     else if(button.id === 'parenthesis') {
       if(!isOpenParenthesisAvailable) {
-        inputBox.value = inputBox.value + '('
+        insertAtCursor('(')
         isOpenParenthesisAvailable = true
         openParenthesis = true
       } else if(isNumberValueAvailable && closeParenthesis) {
-        inputBox.value = inputBox.value + ')'
+        insertAtCursor(')')
         isOpenParenthesisAvailable = false
         closeParenthesis = false
         openParenthesis = false
@@ -65,15 +82,15 @@ for (const index in buttons) {
     }
 
     else if(button.classList[0] === 'operator' && isNumberValueAvailable && inputBox.value){
-      inputBox.value = inputBox.value + button.value
+      insertAtCursor(button.value)
     }
 
     else if(button.className === 'dot-button' && isNumberValueAvailable){
-      inputBox.value = inputBox.value + button.value
+      insertAtCursor(button.value)
     }
 
     else if(button.classList[0] === 'number') {
-      inputBox.value = inputBox.value + button.value
+      insertAtCursor(button.value)
       isNumberValueAvailable = true
       if(openParenthesis){
         closeParenthesis = true
