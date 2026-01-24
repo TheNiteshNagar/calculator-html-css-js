@@ -28,6 +28,8 @@ let resultPanel = document.querySelector('.result-panel')
 const buttons = document.querySelectorAll('button')
 let openParenthesis = false
 let closeParenthesis = false
+let numbersContainDot = false
+let numbersContainOperator = false
 
 // Helper function to insert text at cursor position
 function insertAtCursor(text) {
@@ -98,17 +100,21 @@ for (const index in buttons) {
       }
     }
 
-    else if(button.classList[0] === 'operator' && isNumberValueAvailable && inputBox.value){
+    else if(button.classList[0] === 'operator' && isNumberValueAvailable && inputBox.value && !numbersContainOperator){
       insertAtCursor(button.value)
+      numbersContainOperator = true
+      numbersContainDot = false
     }
 
-    else if(button.className === 'dot-button' && isNumberValueAvailable){
+    else if(button.className === 'dot-button' && isNumberValueAvailable && !numbersContainDot){
       insertAtCursor(button.value)
+      numbersContainDot = true
     }
 
     else if(button.classList[0] === 'number') {
       insertAtCursor(button.value)
       isNumberValueAvailable = true
+      numbersContainOperator = false
       if(openParenthesis){
         closeParenthesis = true
       }
