@@ -73,12 +73,29 @@ for (const index in buttons) {
     }
 
     else if(button.id === 'backspace') {
-      inputBox.value = inputBox.value.slice(0, -1)
+      const start = inputBox.selectionStart
+      const end = inputBox.selectionEnd
+      const currentValue = inputBox.value
+      
+      if (start !== end) {
+        // If text is selected, delete the selection
+        inputBox.value = currentValue.substring(0, start) + currentValue.substring(end)
+        inputBox.setSelectionRange(start, start)
+      } else if (start > 0) {
+        // Delete character before cursor
+        inputBox.value = currentValue.substring(0, start - 1) + currentValue.substring(start)
+        inputBox.setSelectionRange(start - 1, start - 1)
+      }
+      
+      inputBox.focus()
     }
 
     else if(button.id === 'equal') {
-      resultPanel.textContent = eval(inputBox.value)
-      inputBox.value = ''
+      // Check if input panel is not empty before evaluating
+      if(inputBox.value.trim()) {
+        resultPanel.textContent = eval(inputBox.value)
+        inputBox.value = ''
+      }
     }
 
     else if(button.classList[0] === 'operator' && isNumberValueAvailable && inputBox.value){
@@ -103,5 +120,9 @@ for (const index in buttons) {
 document.querySelector('.result-panel').addEventListener('click', ()=>{
   if(resultPanel.textContent){
     inputBox.value = resultPanel.textContent
+    // Set cursor position at the end of the text
+    const length = inputBox.value.length
+    inputBox.setSelectionRange(length, length)
+    inputBox.focus()
   }
 })
