@@ -19,6 +19,17 @@
   --secondary-font-color: #747474;
 }
 
+body.light-mode {
+  --primary-bg-color: #f1f2f3;
+  --secondary-bg-color: #ffffff;
+  --black-bg-color: #000000;
+  --gray-bg-color: #d2d3da;
+  --blue-bg-color: #4b5efc;
+
+  --primary-font-color: #000000;
+  --secondary-font-color: #919192;
+}
+
 html {
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -69,7 +80,7 @@ body {
 .uwu-button {
   width: 2rem;
   height: 2rem;
-  background-image: url('./public/images/uwu-girl-icon.png');
+  background-image: url('./public/images/uwu.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -81,7 +92,9 @@ body {
   height: 2rem;
   background-color: var(--secondary-bg-color);
   border-radius: 20px;
-  cursor: pointer;
+  cursor: pointer;  
+  display: flex;
+  justify-content: left;
 }
 
 .theme-switch-button>.circle-button {
@@ -89,12 +102,20 @@ body {
   width: 2rem;
   border-radius: 50%;
   background-color: var(--gray-bg-color);
+  background-image: url('./public/images/darkmode.png');
+  background-size: 70%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.theme-switch-button-light-mode{
+  justify-content: right;
 }
 
 .full-screen-button {
   width: 2rem;
   height: 2rem;
-  background-image: url('./public/images/fullscreen.svg');
+  background-image: url('./public/images/fullscreen.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -135,7 +156,7 @@ body {
   padding: 0.5rem;
 }
 
-input{
+input {
   all: unset;
   width: inherit;
   height: 100%;
@@ -176,11 +197,16 @@ button {
   width: 5rem;
   height: auto;
   aspect-ratio: 1/1;
-  border-radius: 50%;
+  border-radius: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: 0.1s ease;
+}
+
+button:active {
+  border-radius: 35%;
 }
 
 .back-space-button {
@@ -191,6 +217,44 @@ button {
   aspect-ratio: 1/1;
 }
 
+.back-space-button:active {
+  background-color: #dac9c9;
+}
+
+.equal-button:active {
+  transition: 0.5 ease;
+  font-size: 2.5rem;
+  rotate: 180deg;
+}
+
+.full-screen-button:active {
+  transition: 0.5 ease;
+  rotate: 90deg;
+}
+
+.uwu-button:active {
+  transition: 0.5 ease;
+  rotate: 180deg;
+}
+
+.theme-switch-button > .circle-button:active {
+  transition: 0.5 ease;
+  rotate: 90deg;
+}
+
+.clear-button,
+.parenthesis-button,
+.percent-button {
+  background-color: var(--gray-bg-color);
+}
+
+.divide-button,
+.multiply-button,
+.minus-button,
+.addition-button,
+.equal-button {
+  background-color: var(--blue-bg-color);
+}
 
 @media screen and (min-width: 425px) {
   .calculator {
@@ -199,7 +263,7 @@ button {
     height: 100dvh;
   }
 
-  button{
+  button {
     width: 4rem;
   }
 }
@@ -207,10 +271,10 @@ button {
 @media screen and (min-width: 1024px) {
   .calculator {
     width: 30vw;
-    min-width: 400px;    
+    min-width: 400px;
   }
 
-  button{
+  button {
     width: 5rem;
   }
 }
@@ -218,10 +282,24 @@ button {
 @media screen and (min-width: 2000px) {
   .calculator {
     width: 20vw;
-    min-width: 700px;    
+    min-width: 700px;
   }
 
-  button{
+  button {
     width: 9rem;
+  }
+}
+
+@media (hover: hover) {
+  button:hover {
+    border-radius: 35%;
+  }
+
+  .back-space-button:hover {
+    background-color: #dac9c9;
+  }
+
+  .equal-button:hover {
+    font-size: 2.5rem;
   }
 }
