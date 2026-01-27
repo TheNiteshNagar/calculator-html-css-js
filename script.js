@@ -29,6 +29,7 @@ let numbersContainOperator = false
 let isThemeBlack = true
 const bodyElement = document.body
 const themeButton = document.querySelector('.theme-switch-button')
+let lastNumberValue = false
 
 // Helper function to insert text at cursor position
 function insertAtCursor(text) {
@@ -94,6 +95,16 @@ for (const index in buttons) {
     else if (button.id === 'equal') {
       // Check if input panel is not empty before evaluating
       if (inputBox.value.trim()) {
+        let percentage = null
+        // check is there any % if yes then make it work as Percent
+        if(lastNumberValue) {
+          percentage = '*(1/100)*'
+        }
+        else {
+          percentage = '*(1/100)'
+        }
+
+        if(inputBox.value.includes('%')) inputBox.value = inputBox.value.replaceAll('%', percentage)
         resultPanel.textContent = eval(inputBox.value)
         inputBox.value = ''
       }
@@ -103,15 +114,18 @@ for (const index in buttons) {
       insertAtCursor(button.value)
       numbersContainOperator = true
       numbersContainDot = false
+      lastNumberValue = false
     }
 
     else if (button.className === 'dot-button' && isNumberValueAvailable && !numbersContainDot) {
       insertAtCursor(button.value)
       numbersContainDot = true
+      lastNumberValue = false
     }
 
     else if (button.classList[0] === 'number') {
       insertAtCursor(button.value)
+      lastNumberValue = true
       isNumberValueAvailable = true
       numbersContainOperator = false
       if (openParenthesis) {
